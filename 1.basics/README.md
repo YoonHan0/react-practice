@@ -18,11 +18,11 @@
 : 애플리케이션 번들링(bundling) Tool === webpack
 
 - ex05 <br/>
-: React API 기반으로 애플리케이션 리팩토링
+: React API 기반으로 애플리케이션 리팩토링 <br/>
     ```React.createElement('div', null, 'Hello World');```
 
 - ex06 <br/>
-: React JSX 기반으로 애플리케이션 리팩토링
+: React JSX 기반으로 애플리케이션 리팩토링 <br/>
     ``` App.js는 JSX 문법으로 수정하고
         ReactDOM.render(App(), document.getElementById('root')); ```
 
