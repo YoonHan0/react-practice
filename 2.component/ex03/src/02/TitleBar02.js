@@ -5,7 +5,7 @@ export default function TitelBar02() {
     const [no, setNo] = useState(0);
     const onClickHandler  = function() {      
         setNo(no + 1);
-        console.log(`TitleBar02 Clicked: ${stateNo}`);
+        console.log(`TitleBar02 Clicked: ${no}`);
     }
     return (
         <div>

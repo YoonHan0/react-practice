@@ -16,7 +16,10 @@ export default function App() {
             ref={outterRef}
             className={'App'}
             onScroll={e => {
-                console.log(outterRef.current.clientHeight, innerRef.current.clientHeight, outterRef.current.scrollTop);
+                console.log(
+                    outterRef.current.clientHeight, 
+                    innerRef.current.clientHeight, 
+                    outterRef.current.scrollTop);
             }}
             >
             <div
