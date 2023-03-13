@@ -14,10 +14,12 @@ function App(props) {
         const newEmailsList = emails.filter(function(e) {   // filter: Array안에서 조건이 참이되는 녀석들을 return해줌
             // e: data.json에 있는 모든 값
             // console.log(e.firstName);
-             return text.match(e.firstName) || text.match(e.lastName) || text.match(e.email);
+             // return text.match(e.firstName) || text.match(e.lastName) || text.match(e.email);
+             // return e.firstName.indexOf(text) !== -1 || e.lastName.indexOf(text) !== -1 || e.email.indexOf(text) !== -1;
+             return e.firstName.includes(text) || e.lastName.includes(text) || e.email.includes(text);
          });
          // console.log(newEmailsList);
-         text === null ? setNewEmails(emails) : setNewEmails(newEmailsList);
+         newEmailsList.length === 0 ? setNewEmails(emails) : setNewEmails(newEmailsList);
     }
 
     return (
