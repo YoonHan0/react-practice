@@ -21,7 +21,6 @@ const KanbanBoard = () => {
                 }
             }
         });
-       
         setCards(newCards);
     }
 
