@@ -6,15 +6,23 @@ export default function App() {
 
     let date = new Date();
     // 10의 배수일 때 사라짐
-    const [ticks, setTicks] = useState(0);
+    const [ticks, setTicks] = useState(1);
+    
     useEffect(() => {
-        console.log("바낀다 바껴");
-    }, [ticks]);
+        /* mount 후 */
+        setInterval(() => {
+            setTicks((ticks) => ticks+1);
+            date = new Date();
+            console.log(ticks);
+        }, 1000);
 
-    setInterval(() => {
-        setTicks(ticks+1);
-        date = new Date();
-    }, 1000);
+        return (function() {
+            /* unmount */
+            console.log('After Unmount(componentWillUnmount)');
+        });
+    }, []);
+    
+
     return (
         
         <div>
