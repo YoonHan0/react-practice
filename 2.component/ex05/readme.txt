@@ -1,13 +1,28 @@
 ex05: Component - LifeCycle
 
 01. Class Component
+
    01) Lifecycle : Mount
+      - 1. constructor
+      - 2. getDerivedStateFromProps
+      - 3. render ***
+      - 4. componentDidMount ***
 
    02) Lifecycle II : Update
+      - 1. getDerivedStateFromProps
+      - 2. shouldComponentUpdate *
+      - 3. render ***
+      - 4. getSnapshotBeforeUpdate
+      - 5. componentDidUpdate ***
 
    03) Lifecycle III : Unmmount
+      - componentWillUnmount ***
 
 02. Functional Component: Alternative(대체) - useEffect     // LifeCycle 함수가 실행되는 효과를 본다, 오버라이딩 하는 것이 아니라
+   - getDerivedStateFromProps 대체
+   - After Rendering(componentDidMount, componentDidUpdate) 대체
+   - 바낀 상태에 의존적으로 코드 실행 가능
+   - componentWillUnmount 대체
 
 ==============================================================================================
 
