@@ -4,10 +4,17 @@ import Clock from './Clock';
 
 export default function App() {
 
-    const date = new Date();
+    let date = new Date();
     // 10의 배수일 때 사라짐
     const [ticks, setTicks] = useState(0);
+    useEffect(() => {
+        console.log("바낀다 바껴");
+    }, [ticks]);
 
+    setInterval(() => {
+        setTicks(ticks+1);
+        date = new Date();
+    }, 1000);
     return (
         
         <div>
