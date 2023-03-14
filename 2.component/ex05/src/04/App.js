@@ -4,6 +4,7 @@ import Clock from './Clock';
 
 export default function App() {
 
+    const date = new Date();
     // 10의 배수일 때 사라짐
     const [ticks, setTicks] = useState(0);
 
@@ -16,9 +17,9 @@ export default function App() {
                 null :
                 <Clock
                 message={'ex05: useEffect Hook example'}
-                hours={state.hours}
-                minutes={state.minutes}
-                seconds={state.seconds}/>
+                hours={date.getHours()}
+                minutes={date.getMinutes()}
+                seconds={date.getSeconds()}/>
             }
         </div>
             
