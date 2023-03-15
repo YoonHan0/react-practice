@@ -8,6 +8,13 @@ import dataList from './assets/json/data.json';
 function App(props) {
     const [emails, setEmails] = useState(dataList);
     const [newEmails, setNewEmails] = useState(emails);
+    const [list, setList] = useState({
+        no: null,
+        firstName: '',
+        lastName: '',
+        email: ''
+    });
+
     const notifyKeyWorldChanged = function(text) {
         // console.log(text);
         /* firstName or lastName or email에 있으면 다 출력 */
@@ -22,11 +29,35 @@ function App(props) {
          newEmailsList.length === 0 ? setNewEmails(emails) : setNewEmails(newEmailsList);
     }
 
+    const addFromHandler = (firstName, lastName, email) => {
+        console.log(`이름: ${firstName} ${lastName}, 이메일: ${email}`);
+        const info = {
+            'no': null,
+            'firstName': firstName,
+            'lastName': lastName,
+            'email': email
+        }
+        // console.log(info);
+        // console.log(emails);
+        // etList(info);
+        setNewEmails([...newEmails, info]);
+        
+    }
+
+    const removeListHandler = (no) => {
+        // console.log(`넘겨받은 no: ${no}`);
+        const list = newEmails.filter((el) => el.no !== no);
+        setNewEmails(list);
+        
+    }
+
     return (
         <div id='App' className={'App'}>
-            <RegisterForm />
+            <RegisterForm callbackAddFromHandler={addFromHandler} />
             <Searchbar notifyKeyWorldChanged={notifyKeyWorldChanged} />
-            <Emaillist emails={newEmails}/>
+            <Emaillist 
+                emails={newEmails}
+                callbackRemoveListHandler={removeListHandler}/>
         </div>
     );
 }
