@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.JsonResult;
-import com.example.demo.repository.CardRepository;
+import com.example.demo.repository.EmaillistRepository;
 import com.example.demo.repository.TaskRepository;
 import com.example.demo.vo.TaskVo;
 
@@ -23,16 +23,17 @@ import com.example.demo.vo.TaskVo;
 public class ApiController {
 	
 	@Autowired
-	private CardRepository cardRepository;
+	private EmaillistRepository EmaillistRepository;
 
 	@Autowired
 	private TaskRepository taskRepository;
 
-	@GetMapping("/card")
+	@GetMapping("/emaillist")
 	public ResponseEntity<JsonResult> readCard() {
+		System.out.println("emaillist controller");
 		return ResponseEntity
 				.status(HttpStatus.OK)
-				.body(JsonResult.success(cardRepository.findAll()));
+				.body(JsonResult.success(EmaillistRepository.findAll()));
 	}
 	
 	@GetMapping("/task")

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RegisterForm from './RegisterForm';
 import Searchbar from './Searchbar';
 import Emaillist from './Emaillist';
 import './assets/css/App.css';
-import dataList from './assets/json/data.json';
+// import dataList from './assets/json/data.json';
 
 function App(props) {
-    const [emails, setEmails] = useState(dataList);
+    const [emails, setEmails] = useState([{}]);
     const [newEmails, setNewEmails] = useState(emails);
     const [list, setList] = useState({
         no: null,
@@ -15,17 +15,39 @@ function App(props) {
         email: ''
     });
 
+    const fetchEmaillist = async () => {
+        try {
+            const response = await fetch('/api/emaillist', {
+                method: 'get',      // get방식
+                headers: {
+                    'Accept': 'application/json'    // application/json방식으로 받을 수 있다
+                }
+            });
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+            }
+
+            const json = await response.json();
+            if(json.result !== 'success') {
+                throw new Error(`${json.result} ${json.message}`)
+            }
+
+            setNewEmails(json.data);
+        } catch(err) {
+            console.log(err.message);
+        }
+    }
+
+    useEffect(()=>{
+        fetchEmaillist();
+    }, []);
+
     const notifyKeyWorldChanged = function(text) {
-        // console.log(text);
-        /* firstName or lastName or email에 있으면 다 출력 */
-        const newEmailsList = emails.filter(function(e) {   // filter: Array안에서 조건이 참이되는 녀석들을 return해줌
-            // e: data.json에 있는 모든 값
-            // console.log(e.firstName);
-             // return text.match(e.firstName) || text.match(e.lastName) || text.match(e.email);
-             // return e.firstName.indexOf(text) !== -1 || e.lastName.indexOf(text) !== -1 || e.email.indexOf(text) !== -1;
+
+        const newEmailsList = emails.filter(function(e) { 
              return e.firstName.includes(text) || e.lastName.includes(text) || e.email.includes(text);
          });
-         // console.log(newEmailsList);
          newEmailsList.length === 0 ? setNewEmails(emails) : setNewEmails(newEmailsList);
     }
 

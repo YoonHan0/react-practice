@@ -7,9 +7,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CardVo {
+public class EmaillistVo {
 	private Long no;
-	private String title;
-	private String description;
-	private String status;
+	private String firstName;
+	private String lastName;
+	private String email;
 }
