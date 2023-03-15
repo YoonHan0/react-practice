@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.JsonResult;
 import com.example.demo.repository.EmaillistRepository;
-import com.example.demo.repository.TaskRepository;
-import com.example.demo.vo.TaskVo;
+import com.example.demo.vo.EmaillistVo;
 
 @RestController
 @RequestMapping("/api")
@@ -25,44 +24,21 @@ public class ApiController {
 	@Autowired
 	private EmaillistRepository EmaillistRepository;
 
-	@Autowired
-	private TaskRepository taskRepository;
-
 	@GetMapping("/emaillist")
 	public ResponseEntity<JsonResult> readCard() {
-		System.out.println("emaillist controller");
+		
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(JsonResult.success(EmaillistRepository.findAll()));
 	}
-	
-	@GetMapping("/task")
-	public ResponseEntity<JsonResult> readTask(Long cardNo) {
-		return ResponseEntity
-				.status(HttpStatus.OK)
-				.body(JsonResult.success(taskRepository.findAllByCardNo(cardNo)));
-	}
 
-	@PostMapping("/task")
-	public ResponseEntity<JsonResult> createTask(@RequestBody TaskVo taskVo) {
-		taskRepository.insert(taskVo);
+	@PostMapping("/add")
+	public ResponseEntity<JsonResult> createTask(@RequestBody EmaillistVo emaillistVo) {
+		System.out.println("추가추가추가추가추");
+		EmaillistRepository.insert(emaillistVo);
 		
 		return ResponseEntity
 				.status(HttpStatus.OK)
-				.body(JsonResult.success(taskVo));
+				.body(JsonResult.success(emaillistVo));
 	}
-
-	@SuppressWarnings("serial")
-	@PutMapping("/task/{no}")
-	public ResponseEntity<JsonResult> updateTask(@PathVariable("no") Long no, String done) {
-		taskRepository.updateDone(no, done);
-		
-		return ResponseEntity
-				.status(HttpStatus.OK)
-				.body(JsonResult.success(new HashMap<String, Object>() {{
-				    put("no", no);
-				    put("done", done);
-				}}));
-	}
-
 }

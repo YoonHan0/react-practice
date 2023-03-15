@@ -16,4 +16,8 @@ public class EmaillistRepository {
 	public List<EmaillistVo> findAll() {
 		return sqlSession.selectList("emaillist.findAll");
 	}
+	
+	public Boolean insert(EmaillistVo emaillistVo) {
+		return sqlSession.insert("emaillist.insert", emaillistVo) == 1;
+	}
 }

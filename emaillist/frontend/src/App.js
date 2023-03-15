@@ -3,7 +3,6 @@ import RegisterForm from './RegisterForm';
 import Searchbar from './Searchbar';
 import Emaillist from './Emaillist';
 import './assets/css/App.css';
-// import dataList from './assets/json/data.json';
 
 function App(props) {
     const [emails, setEmails] = useState([{}]);
@@ -33,7 +32,7 @@ function App(props) {
                 throw new Error(`${json.result} ${json.message}`)
             }
 
-            setNewEmails(json.data);
+            setEmails(json.data);
         } catch(err) {
             console.log(err.message);
         }
@@ -43,15 +42,18 @@ function App(props) {
         fetchEmaillist();
     }, []);
 
+    
+
+    /** 검색 안 됨 newEmails의 값이 변하는데 emails를 state로 내려줘서 안 됨 */
     const notifyKeyWorldChanged = function(text) {
 
-        const newEmailsList = emails.filter(function(e) { 
-             return e.firstName.includes(text) || e.lastName.includes(text) || e.email.includes(text);
+        const newEmailsList = emails.filter(function(el) { 
+             return el.firstName.includes(text) || el.lastName.includes(text) || el.email.includes(text);
          });
          newEmailsList.length === 0 ? setNewEmails(emails) : setNewEmails(newEmailsList);
     }
 
-    const addFromHandler = (firstName, lastName, email) => {
+    const addFromHandler = async (firstName, lastName, email) => {
         console.log(`이름: ${firstName} ${lastName}, 이메일: ${email}`);
         const info = {
             'no': null,
@@ -59,10 +61,31 @@ function App(props) {
             'lastName': lastName,
             'email': email
         }
-        // console.log(info);
-        // console.log(emails);
-        // etList(info);
-        setNewEmails([...newEmails, info]);
+
+        try {
+            const response = await fetch('/api/add', {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(info)
+            });
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+            }
+
+            const json = await response.json();
+            console.log(json);
+            if(json.result !== 'success') {
+                throw new Error(`${json.result} ${json.message}`)
+            }
+
+        } catch(err) {
+            console.log(err.message);
+        } 
+        setEmails([...emails, info]);
         
     }
 
@@ -78,7 +101,7 @@ function App(props) {
             <RegisterForm callbackAddFromHandler={addFromHandler} />
             <Searchbar notifyKeyWorldChanged={notifyKeyWorldChanged} />
             <Emaillist 
-                emails={newEmails}
+                emails={emails}
                 callbackRemoveListHandler={removeListHandler}/>
         </div>
     );
