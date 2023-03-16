@@ -33,6 +33,7 @@ module.exports = function(env){
                 type: 'asset/resource'
             }]
         },
+        
         devtool: "eval-source-map",
         devServer: {
             host: '0.0.0.0',

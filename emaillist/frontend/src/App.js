@@ -39,6 +39,7 @@ function App(props) {
     }
 
     useEffect(()=>{
+        console.log("tlqkfdl");
         fetchEmaillist();
     }, []);
 
@@ -82,18 +83,37 @@ function App(props) {
                 throw new Error(`${json.result} ${json.message}`)
             }
 
+            setEmails([...emails, info]);
         } catch(err) {
             console.log(err.message);
         } 
-        setEmails([...emails, info]);
-        
     }
 
-    const removeListHandler = (no) => {
+    const removeListHandler = async (no) => {
         // console.log(`넘겨받은 no: ${no}`);
-        const list = newEmails.filter((el) => el.no !== no);
-        setNewEmails(list);
-        
+        const list = emails.filter((el) => el.no !== no);
+        console.log(`\n======== list: ${list}`);
+        try {
+            const response = await fetch(`/api/delete/${no}`, {
+                method: 'delete',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+            }
+
+            const json = await response.json();
+            console.log(json);
+            if(json.result !== 'success') {
+                throw new Error(`${json.result} ${json.message}`)
+            }
+            setEmails(list);
+        } catch(err) {
+            console.log(err.message);
+        }
     }
 
     return (
