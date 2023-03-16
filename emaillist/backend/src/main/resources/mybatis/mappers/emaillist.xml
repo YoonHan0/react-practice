@@ -9,6 +9,15 @@
 		]]>
 	</select>
 	
+	<select id="findListWithKeyWord" parameterType="string" resultType="emaillistvo">
+		<![CDATA[	
+    		SELECT *
+			FROM emaillist
+			WHERE email LIKE '%${keyword }%' OR first_name LIKE '%${keyword }%' OR last_name LIKE '%${keyword }%'
+ 		    ORDER by no DESC
+		]]>
+	</select>
+	
 	<insert id="insert" parameterType="emaillistvo">
 		<![CDATA[
 			INSERT

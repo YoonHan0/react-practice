@@ -9,7 +9,6 @@ const EmailList = ({emails, callbackRemoveListHandler}) => {
             
             {
                 emails.map(data => <EmailItem
-                                        key={data.no}
                                         no={data.no}
                                         firstName={data.firstName}
                                         lastName={data.lastName}

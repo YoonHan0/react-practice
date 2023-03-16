@@ -32,10 +32,18 @@ public class ApiController {
 				.status(HttpStatus.OK)
 				.body(JsonResult.success(EmaillistRepository.findAll()));
 	}
+	
+	@GetMapping("/emaillist/{keyword}")
+	public ResponseEntity<JsonResult> readCardWithKeyWord(@PathVariable("keyword") String keyword) {
+		// System.out.println("키워드 넘어왔다~" + keyword);
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(JsonResult.success(EmaillistRepository.findListWithKeyWord(keyword)));
+	}
 
 	@PostMapping("/add")
 	public ResponseEntity<JsonResult> createEmail(@RequestBody EmaillistVo emaillistVo) {
-		System.out.println("추가추가추가추가추");
+		// System.out.println("추가추가추가추가추");
 		EmaillistRepository.insert(emaillistVo);
 		
 		return ResponseEntity
@@ -44,7 +52,7 @@ public class ApiController {
 	}
 	@DeleteMapping("/delete/{no}")
 	public ResponseEntity<JsonResult> deleteEmail(@PathVariable("no") Long no) {
-		System.out.println("삭제삭제");
+		// System.out.println("삭제삭제");
 		EmaillistRepository.delete(no);
 		
 		return ResponseEntity

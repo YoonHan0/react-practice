@@ -8,7 +8,7 @@ const EmailItem = (
         lastName, 
         email, 
         callbackRemoveListHandler}) => {
-    console.log(no, firstName, lastName, email);
+    // console.log(no, firstName, lastName, email);
 
     return (
         <li className={styles.Email} key={no}>

@@ -17,6 +17,10 @@ public class EmaillistRepository {
 		return sqlSession.selectList("emaillist.findAll");
 	}
 	
+	public List<EmaillistVo> findListWithKeyWord(String keyword) {
+		return sqlSession.selectList("emaillist.findListWithKeyWord", keyword);
+	}
+	
 	public Boolean insert(EmaillistVo emaillistVo) {
 		return sqlSession.insert("emaillist.insert", emaillistVo) == 1;
 	}
@@ -24,4 +28,6 @@ public class EmaillistRepository {
 	public Boolean delete(Long no) {
 		return sqlSession.insert("emaillist.delete", no) == 1;
 	}
+
+	
 }

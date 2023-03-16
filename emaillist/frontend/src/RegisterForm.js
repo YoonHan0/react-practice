@@ -17,6 +17,10 @@ const RegisterForm = ({callbackAddFromHandler}) => {
                   e.target.elements.firstName.value, 
                   e.target.elements.lastName.value, 
                   e.target.elements.email.value);
+
+              e.target.elements.firstName.value = '';
+              e.target.elements.lastName.value = '';
+              e.target.elements.email.value = '';
             }} >
             <input type='text' name='firstName' placeholder='성' className={styled.InputFirstName} />
             <input type='text' name='lastName' placeholder='이름' className={styled.InputLastName} />

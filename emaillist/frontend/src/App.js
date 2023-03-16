@@ -6,7 +6,6 @@ import './assets/css/App.css';
 
 function App(props) {
     const [emails, setEmails] = useState([{}]);
-    const [newEmails, setNewEmails] = useState(emails);
     const [list, setList] = useState({
         no: null,
         firstName: '',
@@ -22,16 +21,13 @@ function App(props) {
                     'Accept': 'application/json'    // application/json방식으로 받을 수 있다
                 }
             });
-
             if(!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`);
             }
-
             const json = await response.json();
             if(json.result !== 'success') {
                 throw new Error(`${json.result} ${json.message}`)
             }
-
             setEmails(json.data);
         } catch(err) {
             console.log(err.message);
@@ -39,23 +35,37 @@ function App(props) {
     }
 
     useEffect(()=>{
-        console.log("tlqkfdl");
         fetchEmaillist();
     }, []);
 
-    
-
-    /** 검색 안 됨 newEmails의 값이 변하는데 emails를 state로 내려줘서 안 됨 */
-    const notifyKeyWorldChanged = function(text) {
-
-        const newEmailsList = emails.filter(function(el) { 
+    const notifyKeyWorldChanged = async function(text) {
+        /* keyword가 있는 리스트 받아옴 사용X */
+        const keyWordEmailList = emails.filter(function(el) { 
              return el.firstName.includes(text) || el.lastName.includes(text) || el.email.includes(text);
          });
-         newEmailsList.length === 0 ? setNewEmails(emails) : setNewEmails(newEmailsList);
+         try {
+            const response = await fetch(`/api/emaillist/${text}`, {
+                method: 'get',      // get방식
+                headers: {
+                    'Accept': 'application/json'    // application/json방식으로 받을 수 있다
+                }
+            });
+            if(!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+            }
+            const json = await response.json();
+            if(json.result !== 'success') {
+                throw new Error(`${json.result} ${json.message}`)
+            }
+            setEmails(json.data);
+        } catch(err) {
+            console.log(err.message);
+        }
+
     }
 
     const addFromHandler = async (firstName, lastName, email) => {
-        console.log(`이름: ${firstName} ${lastName}, 이메일: ${email}`);
+        // console.log(`이름: ${firstName} ${lastName}, 이메일: ${email}`);
         const info = {
             'no': null,
             'firstName': firstName,
@@ -78,7 +88,7 @@ function App(props) {
             }
 
             const json = await response.json();
-            console.log(json);
+            // console.log(json);
             if(json.result !== 'success') {
                 throw new Error(`${json.result} ${json.message}`)
             }
@@ -92,7 +102,7 @@ function App(props) {
     const removeListHandler = async (no) => {
         // console.log(`넘겨받은 no: ${no}`);
         const list = emails.filter((el) => el.no !== no);
-        console.log(`\n======== list: ${list}`);
+        // console.log(`\n======== list: ${list}`);
         try {
             const response = await fetch(`/api/delete/${no}`, {
                 method: 'delete',
@@ -106,7 +116,7 @@ function App(props) {
             }
 
             const json = await response.json();
-            console.log(json);
+            // console.log(json);
             if(json.result !== 'success') {
                 throw new Error(`${json.result} ${json.message}`)
             }
