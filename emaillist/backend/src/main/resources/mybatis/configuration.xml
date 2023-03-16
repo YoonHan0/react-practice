@@ -7,11 +7,9 @@
     	
 	<typeAliases>
 		<typeAlias type="com.example.demo.vo.EmaillistVo" alias="emaillistvo" />
-		<typeAlias type="com.example.demo.vo.TaskVo" alias="taskvo" />
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mybatis/mappers/emaillist.xml" />
-		<mapper resource="mybatis/mappers/task.xml" />
 	</mappers>
 </configuration>
