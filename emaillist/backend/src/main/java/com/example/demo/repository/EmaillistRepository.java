@@ -20,4 +20,8 @@ public class EmaillistRepository {
 	public Boolean insert(EmaillistVo emaillistVo) {
 		return sqlSession.insert("emaillist.insert", emaillistVo) == 1;
 	}
+
+	public Boolean delete(Long no) {
+		return sqlSession.insert("emaillist.delete", no) == 1;
+	}
 }
