@@ -8,9 +8,9 @@ const KanbanBoard = () => {
     const fetchCards = async () => {
         try {
             const response = await fetch('/api/card', {
-                method: 'get',
+                method: 'get',      // get방식
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json'    // application/json방식으로 받을 수 있다
                 }
             });
 
