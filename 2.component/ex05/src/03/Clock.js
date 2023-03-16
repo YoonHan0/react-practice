@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import './assets/scss/Clock.scss';
 
 export default class Clock extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+
     render() {
         return (
             <div className="clock-field">
