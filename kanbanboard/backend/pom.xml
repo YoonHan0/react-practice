@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	
-	<groupId>com.douzone</groupId>
+	<groupId>com.example</groupId>
 	<artifactId>kanbanboard</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	
@@ -80,7 +80,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
@@ -92,7 +91,6 @@
 						</goals>
 					</execution>
 				</executions>
-				
 				<configuration>
 					<executable>npm</executable>
 					<workingDirectory>../frontend</workingDirectory>
@@ -124,8 +122,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			
+			</plugin>			
 		</plugins>
 	</build>
 </project>
