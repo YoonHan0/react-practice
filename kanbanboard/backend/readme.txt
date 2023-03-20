@@ -27,8 +27,16 @@
 		4) 키로 연결 테스트
 			# ssh -i mykey.pem root@192.168.64.2
 				
+		5) ssh 연결 환경 설정
+			- ~/.ssh/environment
+			======================
+			PATH=/root/.nvm/versions/node/v19.8.1/bin:/root/.local/bin:/root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/local/douzone2023/java/bin:/usr/local/douzone2023/git/bin:/usr/local/douzone2023/maven3.8/bin
+			======================
+			
+			- /etc/ssh/sshd_config
+			  PermitUserEnvironment yes
 		
-		5) jenkins
+		6) jenkins
 			- Publish over SSH 플러그인 설치 - jenkins에 plugin이 없어서 다운받음(jenkins/manage/pluginManager에서 필요한 플로그인 다운)
 			- Publish over SSH 플로그인 ssh server 등록 (name: springboot-publish-server)
 			- 프로젝트의 빌드 후 조치(post-build action) 설정 - Send build artifacts over SSH
