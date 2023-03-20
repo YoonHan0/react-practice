@@ -58,7 +58,10 @@
   				- Exec command (띄어쓰기 없이 Enter)
   					chmod 700 /usr/local/douzone2023/springboot-apps/emaillist/launch.sh
 					/usr/local/douzone2023/springboot-apps/emaillist/launch.sh
-	
+				
+				- 반복 실행 막기(마지막줄 수정, 그냥 파일 그대로 복사하자)
+					$SCRIPT_DIR/$APPLICATION_NAME.jar >> $SCRIPT_DIR/launch.log 2>&1 &
+					
 							===============================================================
 	
 	3. frontend
