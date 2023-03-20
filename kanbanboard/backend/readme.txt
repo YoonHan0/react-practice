@@ -32,8 +32,8 @@
 			- Publish over SSH 플러그인 설치 - jenkins에 plugin이 없어서 다운받음(jenkins/manage/pluginManager에서 필요한 플로그인 다운)
 			- Publish over SSH 플로그인 ssh server 등록 (name: springboot-publish-server)
 			- 프로젝트의 빌드 후 조치(post-build action) 설정 - Send build artifacts over SSH
-	
-	
+			  kanbanboard.jar: transfer
+			  launch.sh: transfer + execution
 	
 							===============================================================
 	
