@@ -3,7 +3,7 @@
 			eclipse Ctrl+F11 (스프링부트 애플리케이션 실행)
 	
 		2) 빌드(배포) - in Jenkins
-		   # mvn -f emaillist/backend exec:exec clean package
+		   # mvn: (-f emaillist/backend exec:exec clean package)
 		   
 		   테스트
 		   # java -Dspring.profiles.active=production -jar emaillist/backend/target/emaillist.jar
@@ -31,7 +31,6 @@
 			- ~/.ssh/environment
 			======================
 			PATH=/root/.nvm/versions/node/v19.8.1/bin:/root/.local/bin:/root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/local/douzone2023/java/bin:/usr/local/douzone2023/git/bin:/usr/local/douzone2023/maven3.8/bin
-			PATH=/root/.local/bin:/root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/local/douzone2023/java/bin:/usr/local/douzone2023/git/bin:/usr/local/douzone2023/maven3.8/bin
 			======================
 			
 			- /etc/ssh/sshd_config
@@ -41,8 +40,24 @@
 			- Publish over SSH 플러그인 설치 - jenkins에 plugin이 없어서 다운받음(jenkins/manage/pluginManager에서 필요한 플로그인 다운)
 			- Publish over SSH 플로그인 ssh server 등록 (name: springboot-publish-server)
 			- 프로젝트의 빌드 후 조치(post-build action) 설정 - Send build artifacts over SSH
-			  kanbanboard.jar: transfer
-			  launch.sh: transfer + execution
+			  1. emaillist.jar: transfer
+			  	- Source files
+			  		: emaillist/backend/target/emaillist.jar
+		  		- Remove prefix
+		  			: emaillist/backend/target/
+	  			- Remote Directory
+	  				: /usr/local/douzone2023/springboot-apps/emaillist
+	  				
+			  2. launch.sh: transfer + execution
+			  	- Source files
+			  		: emaillist/backend/target/launch.sh
+		  		- Remove prefix 
+		  			: emaillist/backend/target/
+	  			- Remote Directory 
+	  				: /usr/local/douzone2023/springboot-apps/emaillist
+  				- Exec command (띄어쓰기 없이 Enter)
+  					chmod 700 /usr/local/douzone2023/springboot-apps/emaillist/launch.sh
+					/usr/local/douzone2023/springboot-apps/emaillist/launch.sh
 	
 							===============================================================
 	
